@@ -1,57 +1,86 @@
 class HealthCheck {
-
-    init() {
+    
+    init() { 
     }
 
-    //private put(文字列変換用)
+    /*
+    配列をstringにしてputする
+    k: key
+    f: field
+    v: value
+    */
     _mapPut(k,f,v){
-        const value = JSON.stringify(v)
+        var value = JSON.stringify(v) //const or var?
         storage.mapPut(k, f, value)
     }
 
-    //private get(文字列変換用)
-    _mapGet(k, f){
-        const v = storage.mapGet(k, f)
-        if(!v) return
+    /*
+    stringを配列に戻して返す
+    k: key
+    f: field
+    */
+    _mapGet(k, f) {
+        var v = storage.mapGet(k, f)
+
+        // いなければ空の配列(新規)
+        if (!v) return []
+
         return JSON.parse(v)
     }
 
-    //配列を取ってくる
-    _getArray(accountName){
-        // ユーザーを取ってくる
-        // 文字列からパース
-        const userInfo = this._mapGet('mainData', accountName)
-
-        // ユーザーがいなければ空の配列(新規のユーザー)
-        if(!userInfo) {
-            return []
-        }
+    /*
+    配列を取ってくる
+    d: トイレかそれ以外か
+    accountName: アカウント
+    */
+    _getArray(d, accountName){
+        var userInfo = this._mapGet(d, accountName)
+            
         // 配列を返す
         return userInfo
     }
 
-    //setter(トイレ以外)
+    /*
+    セッター(トイレ以外)
+    data: {
+        date
+        height
+        weight
+        steps
+        sleep
+        sun
+    }
+    */
     setData(data){
         const accountName = tx.publisher
 
         //前回までの配列を持ってくる
-        var array = this._getArray(accountName)
+        var array = this._getArray('data', accountName)
+        array.push(data)
 
         // 文字列化する
         // ストレージにしまう
-        this._mapPut('mainData', accountName, array.push(data))
+        this._mapPut('data', accountName, array)
     }
 
-    //setter(トイレ)
+    /*
+    セッター(トイレ)
+    data: {
+        date
+        flag
+        time
+    }
+    */
     setToilet(data) {
         const accountName = tx.publisher
 
         //前回までの配列を持ってくる
-        var array = this._getArray(accountName)
+        var array = this._getArray('toilet', accountName)
+        array.push(data)
 
         // 文字列化する
         // ストレージにしまう
-        this._mapPut('toilet', accountName, array.push(data))
+        this._mapPut('toilet', accountName, array)
     }
 
 }
