@@ -61,7 +61,6 @@ class HealthCheck {
         // 文字列化する
         // ストレージにしまう
         this._mapPut('data', accountName, array)
-        return storage.mapGet('data', accountName)
     }
 
     /*
