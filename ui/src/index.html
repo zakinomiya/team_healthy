@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康志向</title>
+    <script src="https://cdn.jsdelivr.net/npm/iost@0.1.20/iost.min.js"></script>
+    <script type="text/javascript" src="js/info.js"></script>
+</head>
+<body>
+    <div class="container">
+        <p>現在のアカウント：</p>
+        <p id="account-display"></p>
+    </div>
+    <div class="container contract-input">
+        <input placeholder="コントラクトID" id='contract-id'/>
+        <button id="fetch-contract-button" value="" type="text">コントラクトを探す</button>
+    </div>
+    <div class="container" id="contract-info" ></div>
+    <div class="container" id="storage-display" ></div>
+</body>
+<script type="text/javascript" src="./dist/bundle.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
+</html>
