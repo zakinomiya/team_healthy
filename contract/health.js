@@ -21,7 +21,7 @@ class HealthCheck {
     accountName: アカウント
     */
     _getArray(d, accountName){
-        const userInfo = storage.mapGet(d, accountName)
+        var userInfo = storage.mapGet(d, accountName)
 
         // いなければ空の配列(新規)
         if(!userInfo) return []
