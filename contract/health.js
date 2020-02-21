@@ -168,7 +168,8 @@ class HealthCheck {
 
         //前回までの配列を持ってくる
         let array = this._getArray('data', accountName)
-        array.push(data)
+        let newData = JSON.parse(data)
+        array.push(newData)
 
         // 文字列化する
         // ストレージにしまう
@@ -191,7 +192,8 @@ class HealthCheck {
 
         //前回までの配列を持ってくる
         let array = this._getArray('toilet', accountName)
-        array.push(data)
+        let newData = JSON.parse(data)
+        array.push(newData)
 
         // 文字列化する
         // ストレージにしまう
