@@ -3,7 +3,7 @@ const sk = {
 
 }
 const address = {
-    "HealthCheck": "contract address",
+    "HealthCheck": "ContractETiNsSJMBYkhQtWePJT5CpRMKpU9Akkfc54sVsxoyKVd",
 
 }
 const contractInfo = {
@@ -15,6 +15,11 @@ const contractInfo = {
     }
 }
 const config = {
-    // "testnet": "http://13.52.105.102:30001",
-    // "chainId": "replace me", 
+    "testnet": "http://13.52.105.102:30001",
+    "chainId": 1023, 
+}
+
+module.exports = {
+    config,
+    address
 }

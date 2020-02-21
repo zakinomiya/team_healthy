@@ -1,54 +1,122 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>健康志向</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/iost@0.1.20/iost.min.js"></script>
-    <script type="text/javascript" src="js/info.js"></script>
+    <!-- <script type="text/javascript" src="js/info.js"></script> -->
 </head>
-
 <body>
-    <div class="title">健康志向</div>
-    <div class="container health-graph">
-        <div id="graph"></div>
-        <p class="select-graph">
-            <select name="select-graph">
-            <option value="height">身長</option>
-            <option value="weight">体重</option>
-            <option value="steps">歩数</option>
-            <option value="tiolet">トイレ</option>
-            <option value="sleep">睡眠時間</option>
-            <option value="sun">日浴時間</option>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="#">健康志向</a>
+    </nav>
+    <br />
+    <div class="container health-graph form-group">
+        <p class="select-graph row">
+            <select id="graph-select" class="form-control col-lg-4" name="select-graph">
+                <option value="height">身長</option>
+                <option value="weight">体重</option>
+                <option value="steps">歩数</option>
+                <option value="toilet">トイレ</option>
+                <option value="sleep">睡眠時間</option>
+                <option value="sun">日浴時間</option>
             </select>
-            <input type="button" value="読み込み">
+            <input type="button" id="load-graph-button" class="btn btn-primary col-lg-4" value="読み込み">
         </p>
-    </div>
+        <div id="graph">
+            <canvas id="myChart"></canvas>
+        </div>
 
-    <div class="container health-input">
-        <p>身長 <input type="number" name="身長" id="height-input" step="0.1"></p>
-        <p>体重 <input type="number" name="体重" id="wheight-input" step="0.1"></p>
-        <p>歩数 <input type="number" name="歩数" id="steps-input" step="1"></p>
-        <p>睡眠時間 <input type="number" name="睡眠時間" id=sleep-hour-input>時間
-            <input type="number" name="睡眠分" id=sleep-minute-input>分
-        </p>
-        <p>日浴時間 <input type="number" name="日浴時間" id=sun-hour-input>時間
-            <input type="number" name="睡眠分" id=sun-minute-input>分
-        </p>
-        <input type="button" value="送信">
     </div>
+    <br />
 
+
+    <div class="container health-input form-group">
+        <form id="send-data-form">
+            <p>
+                <div class="row">
+                    <div class="col-lg-2">身長 </div>
+                    <div class="col-lg-6"><input type="number" class="form-control" name="身長" id="height-input" step="0.1"></div>
+                </div>
+            </p>
+            <p>
+                <div class="row">
+                    <div class="col-lg-2">体重</div>
+                    <div class="col-lg-6"><input type="number" class="form-control" name="体重" id="wheight-input" step="0.1"></div>
+                </div>
+            </p>
+            <p>
+                <div class="row">
+                    <div class="col-lg-2">歩数</div>
+                    <div class="col-lg-6">
+                        <input type="number" class="form-control" name="歩数" id="steps-input" step="1">
+                    </div>
+                </div>
+            </p>
+            <p>
+                <div class="row">
+                    <div class="col-lg-2">
+                        睡眠時間
+                    </div>
+                    <div class="col-lg-6 form-inline">
+                        <input type="number" class="form-control" name="睡眠時間" id=sleep-hour-input>時間
+                        <input type="number" class="form-control" name="睡眠分" id=sleep-minute-input>分
+                    </div>
+                </div>
+            </p>
+            <p>
+                <div class="row">
+                    <div class="col-lg-2">
+                        日浴時間
+                    </div>
+                    <div class="col-lg-6 form-inline">
+                        <input type="number" class="form-control" name="日浴時間" id=sun-hour-input>時間
+                        <input type="number" class="form-control" name="睡眠分" id=sun-minute-input>分
+                    </div>
+                </div>
+            </p>
+            <p>
+                <div class="row">
+                    <div class="col-lg-2">
+                        心拍数
+                    </div>
+                    <div class="col-lg-6 form-inline">
+                        <input type="number" class="form-control" name="心拍数" id=heartbeat-input>bpm
+                    </div>
+                </div>
+            </p>
+            <p class="text-danger">下記のプライバシー・ポリシーに同意するものとします。</p>
+            <input type="button" class="btn btn-primary btn-lg btn-block" id="send-data-button" value="送信">
+        </form>
+    </div>
 
     <div class="container toilet-input">
         <p>
             トイレ
-            <input type="button" value="大" id="toilet-big-input">
-            <input type="button" value="小" id="toilet-little-input">
+            <input type="button" class="btn btn-primary" value="大" id="toilet-big-input">
+            <input type="button" class="btn btn-primary" value="小" id="toilet-little-input" >
         </p>
     </div>
+    <div class="container">
+        <div class="card border-primary mb-3">
+            <div class="card-header">プライバシー・ポリシー</div>
+            <div class="card-body">
+                <p class=" card-text">チーム健康志向（以下「我々」といいます）は、以下のとおり個人情報保護方針を定め、個人情報保護の仕組みを構築し、全メンバーに個人情報保護の重要性の認識と取組みを徹底させることにより、個人情報の保護を推進致します。</p>
+                <h6 class="card-subtitle mb-2 text-muted">個人情報の管理</h6>
+                <p class="card-text">我々は、お客さまの個人情報を正確かつ最新の状態に保ち、個人情報の破損・改ざんなどを防止するため、匿名化等の安全対策を実施し個人情報の厳重な管理を行ないます。</p>
+                <h6 class="card-subtitle mb-2 text-muted">個人情報の利用目的</h6>
+                <p class="card-text">お客さまからお預かりした個人情報は、日本社会全体の健康促進に利用いたします。</p>
+                <h6 class="card-subtitle mb-2 text-muted">法令、規範の遵守と見直し</h6>
+                <p class="card-text">我々は、保有する個人情報に関して適用される日本の法令、その他規範を遵守するとともに、本ポリシーの内容を適宜見直し、その改善に努めます。</p>
+                <h6 class="card-subtitle mb-2 text-muted">お問い合せ</h6>
+                <p class="card-text">我々の個人情報の取扱に関するお問い合せは下記までご連絡ください。</p>
+                <p class="card-text">チーム健康志向 TEL(代表):123-456-XXXX</p>
+            </div>
+        </div>
+    </div>
 </body>
-<script type="text/javascript" src="./dist/bundle.js"></script>
-<script type="text/javascript" src="./js/index.js"></script>
-
+<script type="text/javascript" src="./js/bundle.js"></script>
+<!-- <script type="text/javascript" src="./js/index.js"></script> -->
 </html>
