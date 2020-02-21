@@ -10,7 +10,7 @@ class HealthCheck {
     v: value
     */
     _mapPut(k,f,v){
-        var value = JSON.stringify(v) //const or var?
+        const value = JSON.stringify(v) 
         storage.mapPut(k, f, value)
     }
 
@@ -20,7 +20,7 @@ class HealthCheck {
     f: field
     */
     _mapGet(k, f) {
-        var v = storage.mapGet(k, f)
+        let v = storage.mapGet(k, f)
 
         // いなければ空の配列(新規)
         if (!v) return []
@@ -34,7 +34,7 @@ class HealthCheck {
     accountName: アカウント
     */
     _getArray(d, accountName){
-        var userInfo = this._mapGet(d, accountName)
+        let userInfo = this._mapGet(d, accountName)
             
         // 配列を返す
         return userInfo
@@ -55,12 +55,15 @@ class HealthCheck {
         const accountName = tx.publisher
 
         //前回までの配列を持ってくる
-        var array = this._getArray('data', accountName)
+        let array = this._getArray('data', accountName)
         array.push(data)
 
         // 文字列化する
         // ストレージにしまう
         this._mapPut('data', accountName, array)
+
+        //test
+        //return storage.mapGet('data', accountName)
     }
 
     /*
@@ -75,7 +78,7 @@ class HealthCheck {
         const accountName = tx.publisher
 
         //前回までの配列を持ってくる
-        var array = this._getArray('toilet', accountName)
+        let array = this._getArray('toilet', accountName)
         array.push(data)
 
         // 文字列化する
