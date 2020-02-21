@@ -154,26 +154,26 @@ class HealthCheck {
 
     /*
     セッター(トイレ以外)
-    data: {
-        date
-        height
-        weight
-        steps
-        sleep
-        sun
-    }
+        data: {
+            date
+            height
+            weight
+            steps
+            sleep
+            sun
+        }
     */
     setData(data){
         const accountName = tx.publisher
 
         //前回までの配列を持ってくる
-        let array = this._getArray('data', accountName)
+        let array = this._getArray('mainData', accountName)
         let newData = JSON.parse(data)
         array.push(newData)
 
         // 文字列化する
         // ストレージにしまう
-        this._mapPut('data', accountName, array)
+        this._mapPut('mainData', accountName, array)
 
         //test
         //return storage.mapGet('data', accountName)
@@ -181,11 +181,11 @@ class HealthCheck {
 
     /*
     セッター(トイレ)
-    data: {
-        date
-        flag
-        time
-    }
+        data: {
+            date
+            flag
+            time
+        }
     */
     setToilet(data) {
         const accountName = tx.publisher

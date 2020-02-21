@@ -5,7 +5,7 @@ const IP = 'http://13.52.105.102:30001'
 // const IP = 'http://localhost:30001'
 const Chart = require('chart.js')
 // const CONTRACTID = 'Contract2dnoGhZP1xSScy2VXhA2B2iUyiGEZLQ8K262Z68QvYRU'
-const CONTRACTID = 'Contract9ETdptFBicY4ziGExZtxn4q5uRVa9ZDbApLZVShAtHBZ'
+const CONTRACTID = 'ContractHrESsw2L5F5uRxFMfA6s1BNCQVMrDzz7rU2v1jTSLEoP'
 
 const _ = require('lodash')
 
@@ -106,6 +106,9 @@ const sendMainTransaction = async () => {
 	tx.setChainID(1023)
 
 	await sendTx(tx)
+		.then(() => {
+			alert('トランザクションが成功しました')
+		})
 		.catch(err => {
 			console.log(err)
 		})
@@ -137,6 +140,9 @@ const sendToiletTransaction = async (flag) => {
 	tx.setChainID(1023)
 
 	await sendTx(tx)
+		.then(() => {
+			alert('トランザクションが成功しました')
+		})
 		.catch(err => {
 			console.log(err)
 		})
@@ -196,7 +202,8 @@ const fetchContractStorage = async (type) => {
 	const res = await rpc.blockchain.getContractStorage(
 		CONTRACTID,
 		type,
-		iwallet.account.name
+		iwallet.account.name,
+		true
 	)
     
 	if(res.data !=='null') return res.data
@@ -316,9 +323,11 @@ const init = () => {
 		if (!iwallet) {
 			await loadAccount()
 		} else {
-			clearInterval(load)
-			await loadData()
-			createChart('mainData', 'steps')
+			if(iost){
+				clearInterval(load)
+				await loadData()
+				createChart('mainData', 'steps')
+			}
 		}
 		retry++
 	})

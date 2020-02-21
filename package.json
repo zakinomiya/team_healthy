@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack-dev-server --hot --inline --watch-content-base --target web  --entry ./ui/src/js/index.js --open-page ./ui/src/main.html --mode development",
+    "build": "webpack --output ./ui/src/js/bundle.js --entry ./ui/src/js/index.js --mode=development"
   },
   "repository": {
     "type": "git",
@@ -35,5 +36,8 @@
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
+  },
+  "dependencies": {
+    "chart.js": "^2.9.3"
   }
 }
