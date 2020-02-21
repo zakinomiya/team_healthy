@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>健康志向</title>
+    <script src="https://cdn.jsdelivr.net/npm/iost@0.1.20/iost.min.js"></script>
+    <script type="text/javascript" src="js/info.js"></script>
+</head>
+
+<body>
+    <div class="title">健康志向</div>
+    <div class="container health-graph">
+        <div id="graph"></div>
+        <p class="select-graph">
+            <select name="select-graph">
+            <option value="height">身長</option>
+            <option value="weight">体重</option>
+            <option value="steps">歩数</option>
+            <option value="tiolet">トイレ</option>
+            <option value="sleep">睡眠時間</option>
+            <option value="sun">日浴時間</option>
+            </select>
+            <input type="button" value="読み込み">
+        </p>
+    </div>
+
+    <div class="container health-input">
+        <p>身長 <input type="number" name="身長" id="height-input" step="0.1"></p>
+        <p>体重 <input type="number" name="体重" id="wheight-input" step="0.1"></p>
+        <p>歩数 <input type="number" name="歩数" id="steps-input" step="1"></p>
+        <p>睡眠時間 <input type="number" name="睡眠時間" id=sleep-hour-input>時間
+            <input type="number" name="睡眠分" id=sleep-minute-input>分
+        </p>
+        <p>日浴時間 <input type="number" name="日浴時間" id=sun-hour-input>時間
+            <input type="number" name="睡眠分" id=sun-minute-input>分
+        </p>
+        <input type="button" value="送信">
+    </div>
+
+
+    <div class="container toilet-input">
+        <p>
+            トイレ
+            <input type="button" value="大" id="toilet-big-input">
+            <input type="button" value="小" id="toilet-little-input">
+        </p>
+    </div>
+</body>
+<script type="text/javascript" src="./dist/bundle.js"></script>
+<script type="text/javascript" src="./js/index.js"></script>
+
+</html>
